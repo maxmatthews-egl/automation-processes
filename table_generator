@@ -1,0 +1,20 @@
+import numpy as np
+import pandas as pd
+from data_cleaner.py import df, classes, no_classes, no_sims, load_data
+
+
+
+def select_sims(df, classes, quartile, no_sims):
+    '''
+    Takes no_sims symmetrically around specified quartile for all classes.
+    Outputs the standalone loss at specified quartile  
+    '''
+
+    for col in classes:
+        
+        qval = df[col].quantile(quantile)
+        
+
+
+
+
