@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd 
 
-#########################Instructions#############################
-#Change excel_path, sheet_name, usecols to match excel formatting#
+##################################################################
+#Section 1: import and adjustment of data                        #
 ##################################################################
 
 df = pd.read_csv(r"C:\\Users\\matthewsm\\OneDrive - Enstargroup\\2026 Work\\02. Feb\\three_lens_tst\\One-Year Reserve Risk by Class.csv")
@@ -30,19 +30,14 @@ net_res.insert(1, 'qbe2', net_res.pop('qbe2'))
 net_res = net_res.drop(columns=['qbe_atom23_lloyds', 'qbe_atom23_other'])
 net_res = net_res.reindex(columns=df.columns, fill_value=0)
 
-'''
-Section 2: Finding 95th Percentile Losses
-'''
-no_sims = len(df)
-sims_selected = 101
-
-#upper_bound = int(no_sims*0.05 + sims_selected//2)
-#lower_bound = int(no_sims*0.05 - sims_selected//2)
+##################################################################
+#Section 2: Finding 95th Percentile Loss                         #
+##################################################################
 start = 9949
 end = 10050
 
-
 df = df.sort_values('total') #Sorting
+
 
 #Creating Undiversified 1:20
 undiversified = df.iloc[:,1:].quantile(0.05)
@@ -53,8 +48,19 @@ var_95 = pd.concat([undiversified, diversified], axis = 1).T
 var_95 = var_95.rename(index={0.05: 'undiversified', 0.00: 'diversified'})
 
 
-'''
-Section 3: Combining dataframes
-'''
-ouptut_df = pd.concat([net_res,var_95], axis = 0, join = 'inner') # Inner join takes intersection and drops cols not present in both ('Sim' in this case)
-print(ouptut_df)
+##################################################################
+#Section 3: Creating Output Dataframe                            #
+##################################################################
+
+combined_df = pd.concat([net_res,var_95], axis = 0, join = 'inner') # Inner join takes intersection and drops cols not present in both ('Sim' in this case)
+
+key_cols = combined_df.loc['net'].nlargest(6).index # Take 6 largest Net Res (5 Classes + Total)
+combined_df = combined_df[key_cols]
+
+output_df = combined_df.copy()
+output_df.loc['net']  = output_df.loc['net']/output_df.loc['net','total']
+output_df.loc['diversified']  = output_df.loc['diversified']/output_df.loc['diversified','total']
+output_df = output_df.drop(columns = 'total')
+
+
+print(output_df)
