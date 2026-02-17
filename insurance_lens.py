@@ -64,14 +64,13 @@ combined_df = pd.concat([net_res,var_95], axis = 0, join = 'inner') # Inner join
 key_cols = combined_df.loc['net'].nlargest(6).index # Take 6 largest Net Res (5 Classes + Total)
 combined_df = combined_df[key_cols]
 
-print(combined_df)
-print(tot_net_res)
 
 #Convert to % and $M
 output_df = combined_df.copy()
 output_df.loc['net']  /= tot_net_res
 output_df.loc['diversified']  /= output_df.loc['diversified','total']
 output_df.loc['undiversified'] /= 1_000_000
+
 
 #Transpose and swap order
 output_df = output_df.drop(columns = 'total').T
@@ -82,4 +81,4 @@ output_df = output_df.rename(columns={'net': 'Mean Contribution','diversified': 
 
 print(output_df)
 #Output
-#output_df.to_excel('three_lens_table.xlsx')
+output_df.to_excel('three_lens_table.xlsx')
