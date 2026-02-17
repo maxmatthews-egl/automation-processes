@@ -5,7 +5,10 @@ import pandas as pd
 #Section 1: import and adjustment of data                        #
 ##################################################################
 
-df = pd.read_csv(r"C:\\Users\\matthewsm\\OneDrive - Enstargroup\\2026 Work\\02. Feb\\three_lens_tst\\One-Year Reserve Risk by Class.csv")
+reserve_sim_path = r"C:\\Users\\matthewsm\\OneDrive - Enstargroup\\2026 Work\\02. Feb\\three_lens_tst\\One-Year Reserve Risk by Class.csv"
+reserve_volume_path = r"C:\\Users\\matthewsm\\OneDrive - Enstargroup\\2026 Work\\02. Feb\\three_lens_tst\\net_reserves.xlsx"
+
+df = pd.read_csv(reserve_sim_path)
 df = df.dropna(how = 'all', axis = 1) #Drop all N/A cols
 
 #Combining QBE2 into one class
@@ -15,7 +18,7 @@ df = df.drop(columns=['qbe_atom23_lloyds', 'qbe_atom23_other'])
 df['total'] = df.iloc[:,1:].sum(axis = 1) # Creating total col excl. sim number
 
 #Taking Gross & RI Reserves to calculate Net Reserves
-reserves = pd.read_excel(r"C:\\Users\\matthewsm\\OneDrive - Enstargroup\\2026 Work\\02. Feb\\three_lens_tst\\net_reserves.xlsx")
+reserves = pd.read_excel(reserve_volume_path)
 reserves.columns = ["class", "reserve_type", "year", "amount"]
 reserves = reserves.pivot_table(index="class", columns="reserve_type", values="amount", aggfunc="sum").fillna(0)
 reserves['net'] = reserves['Gross Reserves'] + reserves['RI Reserves']
@@ -71,6 +74,6 @@ output_df = output_df[['net','diversified','undiversified']]
 #Renaming cols
 output_df = output_df.rename(columns={'net': 'Mean Contribution','diversified': '95th contribution to the stress','undiversified': 'Standalone VaR ($M)'})
 
-
+print(output_df)
 #Output
 # output_df.to_excel('three_lens_table.xlsx')
