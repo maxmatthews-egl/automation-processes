@@ -14,20 +14,27 @@ This is a CSV extracted from Igloo Desktop. The extraction process is documented
 ### 1.2 Class Reserves
 This file requires manual manipulation by copying and pasting from Igloo Manager. To accurately set up take the following steps:
 Open Igloo Manger and select your desired run by double clicking
-Scroll to the bottom of the selection bar on the left and click insurance
+Scroll to the bottom of the selection bar on the left and click insurance under Results
+
 ![Screenshot](Documentation/documentation_1.png)
+
 Open Rank Correlations and select Total
 Now go to the below grid and filter item to show just net and gross reserves
+
 ![Screenshot](Documentation/documentation_2.png)
+
 Left click where it says .mean in the column header and select copy with headers
 Finally simply paste into A1 of a new excel workbook. Save it and exit. If you do not exit you may run into permission errors.
 
 The final product should look like this:
+
 ![Screenshot](Documentation/documentation_3.png)
 
 ### 1.3 Path updates
 The final step is change the reserve_sim_path and reserve_volume_path variables. They should look like this within the repo:
+
 ![Screenshot](Documentation/documentation_4.png)
+
 The easiest way to do this is to left click over the prepared files in sections 1.1 and 1.2 and select copy as path. You can then paste this path ensuring the formatting aligns with the above screenshot. This copying method only has single slashes whereas a the r string requires double slashes so these will have to be added manually.
 
 ### 1.4 A note on the output

@@ -81,4 +81,4 @@ output_df = output_df.rename(columns={'net': 'Mean Contribution','diversified': 
 
 print(output_df)
 #Output
-output_df.to_excel('three_lens_table.xlsx')
+#output_df.to_excel('three_lens_table.xlsx')
