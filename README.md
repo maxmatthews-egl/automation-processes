@@ -46,8 +46,11 @@ The last line of code will read: `output_df.to_excel('three_lens_table.xlsx')` T
 The code is split into 3 sections with large comment boxes to divide. While the code is thoroughly commented throughout I have provided an overview of the methodology and any points of interest below
 
 These 3 sections aim to:
+
 1.Drop invalid classes and create two data frames of the same structure so that they can be glued together later on.
+
 2.Find both diversified and undiversified losses at the 95th 
+
 3.Combine the net reserves and loss dataframes into one 3x5 output table.
 
 ### 2.1 Import and Adjustment of data
@@ -55,6 +58,7 @@ These 3 sections aim to:
 The Igloo outputs do not perfectly align with the data needed for the insurance lens piece due to 2 key problems:
 
 a. QBE2 is split into it's Lloyd's and non-Lloyd's classes
+
 b. assumed classes that are not ADCs do are for entity usage and therefore need to be removed
 
 The data from the two input files organised in sections 1.1 and 1.2 (named df and net_res respectively) perform these drops and are also rearranged into the same thape in this section. This includes renaming and reindexing net_res columns so that the column names and numbers are aligned with df.
