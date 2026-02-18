@@ -3,6 +3,7 @@
 ## 1. Data Requirements and Manual inputs
 
 If the code is not producing an excel sheet as output please refer to section 1.4
+
 If you wish to change the number of classes displayed in the table please refer to section 2.3
 
 To run this script, you will need to take 3 relatively painless tasks to input the data in a readable format. If done correctly the code should require no real changes.
