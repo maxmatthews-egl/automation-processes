@@ -10,7 +10,7 @@ To run this script, you will need to take 3 relatively painless tasks to input t
 These tasks are to organise two files and change their file path within the script. One file will be a pure extraction from Igloo in CSV form, the other will some require manual manipulation detailed below.
 
 ### 1.1 Reserve Risk sims
-This is a CSV extracted from Igloo Desktop. The extraction process is documented here: PLACEHOLER
+This is a CSV extracted from Igloo Desktop. The extraction process is documented here: PLACEHOLDER
 
 ### 1.2 Class Reserves
 This file requires manual manipulation by copying and pasting from Igloo Manager. To accurately set up take the following steps:
